@@ -1,0 +1,155 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Estilos globais para conteúdo de posts */
+#content {
+  line-height: 1.8;
+  font-size: 16px;
+  color: #093a58;
+}
+
+#content h2 {
+  font-size: 24px;
+}
+
+#content h3 {
+  font-size: 18px;
+}
+
+#content h4 {
+  font-size: 16px;
+}
+
+#content h1, #content h2, #content h3 {
+  font-weight: bold;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color: #0190d2;
+  line-height: 1.4;
+}
+
+#content p {
+  margin-bottom: 12px;
+  text-align: justify;
+}
+
+#content img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+}
+
+#content blockquote {
+  border-left: 4px solid #ccc;
+  padding-left: 20px;
+  margin-left: 0;
+  font-style: italic;
+  color: #666;
+}
+
+#content img {
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+  display: block;
+  border-radius: 10px;
+} 
+
+#content ul, #content ol {
+  padding-left: 20px;
+  margin-bottom: 24px;
+}
+
+#content ul li, #content ol li {
+  margin-bottom: 10px;
+}
+
+#content a {
+  color: #0066cc;
+  text-decoration: underline;
+}
+
+#content a:hover {
+  color: #004999;
+} 
+
+.carousel-container {
+  gap: 0; /* Remove qualquer espaço entre os slides */
+}
+
+.slide {
+  flex-basis: 100%; /* Ocupa 100% do container */
+  min-width: 100%; /* Certifica-se que o slide não encolha */
+}
+
+.custom-arrow {
+  position: absolute;
+  top: 50%; /* Adjust this value to vertically center the arrows */
+  transform: translateY(-50%);
+  z-index: 10; /* Ensure arrows are above the slider content */
+}
+
+.slick-prev::before {
+  display: none;
+}
+
+.slick-next::before {
+  display: none;
+}
+
+.custom-next {
+  right: 10px; /* Adjust as necessary */
+}
+
+.custom-prev {
+  left: 10px; /* Adjust as necessary */
+}
+
+/* Override default styles for slick-dots if needed */
+.slick-dots {
+  bottom: 24px !important; /* Adjust position if necessary */
+}
+
+
+.custom-dots {
+  position: absolute;
+  bottom: 32px; /* Adjust this value to control how far up the dots appear in the image */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px; /* Space between dots */
+  z-index: 10; /* Ensure dots appear above the image */
+}
+
+.custom-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  transition: background-color 0.3s;
+}
+
+.custom-dot.active {
+  background-color: #0190d2; /* Active dot color */
+}
+
+.custom-dots li button:before {
+  font-size: 12px;
+  color: transparent; /* Hide the default slick dot */
+}
+
+.custom-dots li.slick-active div {
+  background-color: #0190d2; /* Active dot color */
+}
+
+.carousel-container {
+  position: relative;
+  overflow: hidden; /* Prevents overflow from showing */
+  width: 100%; /* Ensure it takes full width */
+}
+
+.carousel-slide {
+  width: 100%; /* Each slide takes the full width */
+  flex-shrink: 0; /* Prevent shrinking */
+}

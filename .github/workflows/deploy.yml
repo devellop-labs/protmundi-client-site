@@ -1,0 +1,36 @@
+name: Deploy Next.js to cPanel
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout o código do repositório
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Configurar a chave SSH
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.8.1
+        with:
+          ssh-private-key: ${{ secrets.CPANEL_SSH_KEY }}
+
+      # Enviar os arquivos para o servidor
+      - name: Upload files to cPanel
+        run: |
+          rsync -avz --exclude=".next" --exclude="node_modules" ./ ${{ secrets.CPANEL_USER }}@${{ secrets.CPANEL_HOST }}:/home/${{ secrets.CPANEL_USER }}/path-to-your-app/
+
+      # Executar os comandos de build no servidor remoto
+      - name: Build and start the app on cPanel
+        run: |
+          ssh ${{ secrets.CPANEL_USER }}@${{ secrets.CPANEL_HOST }} << 'EOF'
+          cd /home1/${{ secrets.CPANEL_USER }}/homolog.protmundi.com.br/
+          yarn
+          yarn build
+          pm2 restart protmundi-client || pm2 start npm --name "protmundi-client" -- start
+          EOF

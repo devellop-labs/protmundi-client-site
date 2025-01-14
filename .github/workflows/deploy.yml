@@ -14,16 +14,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Configurar a chave SSH
+      # Configurar a chave SSH manualmente
       - name: Set up SSH
-        uses: webfactory/ssh-agent@v0
-        with:
-          ssh-private-key: ${{ secrets.CPANEL_SSH_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.CPANEL_SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.CPANEL_HOST }} >> ~/.ssh/known_hosts
 
       # Enviar os arquivos para o servidor
       - name: Upload files to cPanel
         run: |
-          rsync -avz --exclude=".next" --exclude="node_modules" ./ ${{ secrets.CPANEL_USER }}@${{ secrets.CPANEL_HOST }}:/home/${{ secrets.CPANEL_USER }}/path-to-your-app/
+          rsync -avz --exclude=".next" --exclude="node_modules" ./ ${{ secrets.CPANEL_USER }}@${{ secrets.CPANEL_HOST }}:/home1/${{ secrets.CPANEL_USER }}/homolog.protmundi.com.br/
 
       # Executar os comandos de build no servidor remoto
       - name: Build and start the app on cPanel

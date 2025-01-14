@@ -21,10 +21,6 @@ jobs:
           echo "${{ secrets.CPANEL_SSH_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H ${{ secrets.CPANEL_HOST }} >> ~/.ssh/known_hosts
-          # Limpar qualquer chave SSH no agente
-          ssh-add -D
-          # Adicionar a chave específica para a sessão
-          ssh-add ~/.ssh/id_rsa
 
       # Enviar os arquivos para o servidor
       - name: Upload files to cPanel

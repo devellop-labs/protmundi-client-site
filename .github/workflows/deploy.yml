@@ -16,7 +16,7 @@ jobs:
 
       # Configurar a chave SSH
       - name: Set up SSH
-        uses: webfactory/ssh-agent@v0.8.1
+        uses: webfactory/ssh-agent@v0
         with:
           ssh-private-key: ${{ secrets.CPANEL_SSH_KEY }}
 
